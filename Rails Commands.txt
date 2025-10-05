@@ -22,10 +22,6 @@ rails action_text:install
 
 rails db:migrate
 
-
-Google Maps Key:
-AIzaSyBwxFdoBPIH6rvB2OoD7X0cGgTFtMOIh78
-
 To create Jobs
 rails g job jobname
 
