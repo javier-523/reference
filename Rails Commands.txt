@@ -1,0 +1,75 @@
+Rails Commands
+
+My bg color rgb(20, 103, 159)
+
+Generate app
+
+  rails new appname
+  
+Install all gems with
+
+  bundle install
+  
+Create new app with mysql/postgresql and bootstrap
+  rails new appname --database mariadb-mysql --css bootstrap
+  rails new appname --database postgresql --css bootstrap
+  
+Start server in differen port
+    rails s -p 3001
+    
+rails g scaffold posts title body:rich_text
+rails action_text:install
+
+rails db:migrate
+
+
+Google Maps Key:
+AIzaSyBwxFdoBPIH6rvB2OoD7X0cGgTFtMOIh78
+
+To create Jobs
+rails g job jobname
+
+To run job in controller
+jobname.perform_later(params)
+
+
+
+on the page html
+<%= turbo_stream_from @obj%>
+
+on the job rb
+obj.broadcast_replace_to(@obj, target: "id", partial: "places/map", locals: {place: place})
+
+
+rails g stimulus name
+creates a javascript controller
+
+Gems
+gem "money", "~> 6.19"
+gem "money-rails", "~> 1.15"
+gem "kaminari", "~> 1.2", ">= 1.2.2"
+
+format paginator
+rails generate kaminari:config
+rails generate kaminari:views bootstrap4
+@open_referrals = Referral.page(params[:page]).per(20).order(created_at: :desc)
+<%= paginate @open_referrals, class: "pagination ms-auto"%>
+
+
+rails g scenic:view transaction_entries
+
+
+
+
+
+Recompile Assets
+rm -rf public/assets
+bundle exec rails assets:clobber
+bundle exec rails assets:precompile
+
+
+Load css
+<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+
+  rake db:generate_seeds

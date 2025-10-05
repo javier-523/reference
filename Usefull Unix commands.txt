@@ -1,0 +1,84 @@
+Usefull Unix commands
+
+Display disk space utilization
+sudo du -cha --max-depth=1 / | grep -E "M|G"
+
+Clean up
+dpkg --get-selections | grep linux-image
+sudo apt-get remove --purge linux-image-6.8.0-62-generic
+
+
+CREATE USER teamname WITH PASSWORD 'your_password';
+CREATE DATABASE yourdb OWNER teamname;
+GRANT CONNECT ON DATABASE yourdb TO teamname;
+
+sudo chmod -R o+w reports
+
+docker run --rm --volumes-from loki -v $(pwd):/backup busybox tar cvfz /backup/backup.tar.gz /loki
+
+For Traefik certificates files
+chmod 600 acme.json
+
+journalctl -u ollama --since "2025-05-01 10:00:00" --until "2025-05-02 11:00:00"
+journalctl -u ollama --since "since 15min ago"
+
+
+wsl.exe -d Ubuntu-24.04 to run locally
+
+To copy public key to a host from ourdocker2 /home/ale/docker_volumes
+ssh-copy-id -i id_ed25519npf.pub newhost.fjrg.net
+
+
+Docker Registry
+docker pull image-name or 
+docker build -f Dockerfile.dev -t rubydev1.fjrg.net/tuchoferdev . (development) or
+docker build -t rubydev1.fjrg.net/tuchofer . (production)
+
+
+
+docker push rubydev1.fjrg.net/tuchoferdev or
+docker push rubydev1.fjrg.net/tuchofer
+
+On the docker compose 
+image: rubydev1.fjrg.net/tuchoferdev or
+image: rubydev1.fjrg.net/tuchofer
+
+
+Setup Raisl dev environment
+
+VM or container with ubunut 25.04, 5 CPU 6g RAM, 1G SWAP, 80g disk
+Fuse=1, Mount=nfs, nesting=1, Unpriviledge=no, Protection=no
+
+- install curl and nvm
+sudo apt install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash (installs nvm)
+- logout and login to activate
+
+-install node.js and yarn
+nvm install node
+npm install -g yarn
+
+-install ruby
+sudo apt update
+sudo apt install build-essential rustc libssl-dev libyaml-dev zlib1g-dev libgmp-dev
+curl https://mise.run | sh
+echo 'eval "$(~/.local/bin/mise activate)"' >> ~/.bashrc
+source ~/.bashrc
+mise use -g ruby@3
+
+-install rails
+gem install rails
+
+-install mysql libraries
+sudo apt install libpq-dev
+
+-install git
+sudo apt install git
+
+-install docker
+sudo apt remove apparmor
+then folllow instructions on
+https://docs.docker.com/engine/install/ubuntu/
+
+Finally
+sudo usermod -aG docker $USER
