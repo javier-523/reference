@@ -1,31 +1,13 @@
 services:
-  alloy:
-    image: grafana/alloy:latest
-    container_name: alloy
-    hostname: UbuntuServer1
+  loki:
+    container_name: loki
+    image: grafana/loki:latest
     restart: unless-stopped
-    # logging:
-    #   driver: loki
-    #   options:
-    #     loki-url: "https://loki.fjrg.net/loki/api/v1/push"
-    #     loki-retries: 2
-    #     loki-max-backoff: 800ms
-    #     loki-timeout: 1s
-    #     keep-file: "true"
-    #     mode: "non-blocking"
-    command:
-      - run
-      - --server.http.listen-addr=0.0.0.0:12345
-      - --storage.path=/var/lib/alloy/data
-      - /etc/alloy/config.alloy
+    command: "-config.file=/etc/loki/config.yaml"
+    environment:
+      - TZ=America/New_York
     ports:
-      - 12345:12345
+      - 3100:3100
     volumes:
-      - ./config.alloy:/etc/alloy/config.alloy
-      - ~/docker_volumes/alloy/data:/var/lib/alloy/data
-      - /:/rootfs:ro
-      - /run:/run:ro
-      - /var/log:/var/log:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker/:ro
-      - /run/udev/data:/run/udev/data:ro
+      - ~/docker_volumes/loki/config/config.yaml:/etc/loki/config.yaml:ro
+      - ~/docker_volumes/loki/data:/loki:rw
