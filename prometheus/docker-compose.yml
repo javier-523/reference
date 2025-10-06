@@ -1,0 +1,15 @@
+volumes:
+  prometheus-data:
+    driver: local
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ~/docker_volumes/prometheus:/config
+      - ~/docker_volumes/prometheus/data:/prometheus
+    restart: unless-stopped
+    command: --web.enable-lifecycle  --config.file=/config/prometheus.yml --web.enable-remote-write-receiver
